@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace HelpMeApp.Infrastructure.Repositories
 {
@@ -22,9 +23,9 @@ namespace HelpMeApp.Infrastructure.Repositories
             this._context = _context;
             _dbSet = this._context.Set<T>();
         }
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return _dbSet.ToList();
+            return await _dbSet.ToListAsync();
         }
         public T GetById(object id)
         {
@@ -47,6 +48,11 @@ namespace HelpMeApp.Infrastructure.Repositories
         public void Save()
         {
             _context.SaveChanges();
+        }
+
+        public Task<IEnumerable<T>> GetAll()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

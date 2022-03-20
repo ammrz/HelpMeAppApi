@@ -13,13 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{BF7EC3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{3E98CEC5-0D09-4E11-A653-6083F4B84CD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpMeApp.Api", "HelpMeApp.Api\HelpMeApp.Api.csproj", "{88A79058-5BD0-46A8-AFB9-4F100C4B3985}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelpMeApp.Api", "HelpMeApp.Api\HelpMeApp.Api.csproj", "{88A79058-5BD0-46A8-AFB9-4F100C4B3985}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpMeApp.Application", "HelpMeApp.Application\HelpMeApp.Application.csproj", "{F50B9C20-62F8-47DE-8F07-7ADF1BFDA86D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelpMeApp.Application", "HelpMeApp.Application\HelpMeApp.Application.csproj", "{F50B9C20-62F8-47DE-8F07-7ADF1BFDA86D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpMeApp.Domain", "HelpMeApp.Domain\HelpMeApp.Domain.csproj", "{BF59948C-FCB7-4A85-AF49-A25FB1592438}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelpMeApp.Domain", "HelpMeApp.Domain\HelpMeApp.Domain.csproj", "{BF59948C-FCB7-4A85-AF49-A25FB1592438}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelpMeApp.Infrastructure", "HelpMeApp.Infrastructure\HelpMeApp.Infrastructure.csproj", "{817A82D7-FFBA-4F56-A975-C88E0047654F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelpMeApp.Infrastructure", "HelpMeApp.Infrastructure\HelpMeApp.Infrastructure.csproj", "{817A82D7-FFBA-4F56-A975-C88E0047654F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

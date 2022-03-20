@@ -4,4 +4,21 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Handlers\Comment\Commands\" />
+    <Folder Include="Handlers\Comment\Queries\" />
+    <Folder Include="Handlers\Domain\Commands\" />
+    <Folder Include="Handlers\Domain\Queries\" />
+    <Folder Include="Handlers\Request\Commands\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="MediatR" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HelpMeApp.Infrastructure\HelpMeApp.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

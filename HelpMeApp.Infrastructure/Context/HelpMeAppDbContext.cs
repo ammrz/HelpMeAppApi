@@ -15,7 +15,7 @@ namespace HelpMeApp.Infrastructure.Context
         {
         }
 
-        protected HelpMeAppDbContext()
+        public HelpMeAppDbContext()
         {
         }
         public DbSet<Request> Requests { get; set; }

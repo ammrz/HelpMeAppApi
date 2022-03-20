@@ -23,17 +23,17 @@ namespace HelpMeApp.Infrastructure.Repositories
             this._context = _context;
             _dbSet = this._context.Set<T>();
         }
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAll()
         {
             return await _dbSet.ToListAsync();
         }
-        public T GetById(object id)
+        public async Task<T> GetById(object id)
         {
-            return _dbSet.Find(id);
+            return await _dbSet.FindAsync(id);
         }
-        public void Insert(T obj)
+        public async Task Insert(T obj)
         {
-            _dbSet.Add(obj);
+            await _dbSet.AddAsync(obj);
         }
         public void Update(T obj)
         {
@@ -45,14 +45,9 @@ namespace HelpMeApp.Infrastructure.Repositories
             T existing = _dbSet.Find(id);
             _dbSet.Remove(existing);
         }
-        public void Save()
+        public async Task Save()
         {
-            _context.SaveChanges();
-        }
-
-        public Task<IEnumerable<T>> GetAll()
-        {
-            throw new System.NotImplementedException();
+            await _context.SaveChangesAsync();
         }
     }
 }

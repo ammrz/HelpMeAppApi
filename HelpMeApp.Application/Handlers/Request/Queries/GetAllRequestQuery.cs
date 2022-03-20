@@ -13,10 +13,10 @@ namespace HelpMeApp.Application.Handlers.Request.Queries
 {
     public class GetAllRequestQuery : IRequest<List<RequestDto>>
     {
-        public class GetProductsHandler : IRequestHandler<GetAllRequestQuery, List<RequestDto>>
+        public class GetAllRequestHandler : IRequestHandler<GetAllRequestQuery, List<RequestDto>>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Request> _repository;
-            public GetProductsHandler(GenericRepository<HelpMeApp.Domain.Entities.Request> repository)
+            public GetAllRequestHandler(GenericRepository<HelpMeApp.Domain.Entities.Request> repository)
             {
                 _repository = repository;
             }

@@ -3,6 +3,7 @@ using HelpMeApp.Application.Handlers.Comment.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +16,24 @@ namespace HelpMeApp.Api.Controllers
     public class CommentController : ControllerBase
     {
         readonly IMediator _mediator;
-        public CommentController(IMediator mediator)
+        protected readonly ILogger<CommentController> _logger;
+        public CommentController(IMediator mediator, ILogger<CommentController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetComments(GetAllCommentQuery query)
+        public async Task<ActionResult> GetComments()
         {
             try
             {
-                var dtos = await _mediator.Send(query);
+                var dtos = await _mediator.Send(new GetAllCommentQuery());
                 return Ok(dtos);
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }
@@ -45,7 +48,7 @@ namespace HelpMeApp.Api.Controllers
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }
@@ -60,7 +63,7 @@ namespace HelpMeApp.Api.Controllers
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }
@@ -75,22 +78,22 @@ namespace HelpMeApp.Api.Controllers
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }
 
         [HttpDelete("DeleteComment")]
-        public async Task<ActionResult> DeleteComment(DeleteCommentCommand command)
+        public async Task<ActionResult> DeleteComment([FromRoute] Guid id)
         {
             try
             {
-                await _mediator.Send(command);
+                await _mediator.Send(new DeleteCommentCommand { Id =id});
                 return Ok();
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }

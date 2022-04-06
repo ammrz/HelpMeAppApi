@@ -3,6 +3,7 @@ using HelpMeApp.Application.Handlers.Request.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +16,24 @@ namespace HelpMeApp.Api.Controllers
     public class RequestController : ControllerBase
     {
         readonly IMediator _mediator;
-        public RequestController(IMediator mediator)
+        protected readonly ILogger<RequestController> _logger;
+        public RequestController(IMediator mediator, ILogger<RequestController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetRequests(GetAllRequestQuery query)
+        public async Task<ActionResult> GetRequests()
         {
             try
             {
-                var dtos = await _mediator.Send(query);
+                var dtos = await _mediator.Send(new GetAllRequestQuery());
                 return Ok(dtos);
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }
@@ -45,7 +48,7 @@ namespace HelpMeApp.Api.Controllers
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }
@@ -60,7 +63,7 @@ namespace HelpMeApp.Api.Controllers
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }
@@ -75,22 +78,22 @@ namespace HelpMeApp.Api.Controllers
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }
 
-        [HttpDelete( "DeleteRequest")]
-        public async Task<ActionResult> DeleteRequest(DeleteRequestCommand command)
+        [HttpDelete( "DeleteRequest/id")]
+        public async Task<ActionResult> DeleteRequest([FromRoute] Guid id)
         {
             try
             {
-                await _mediator.Send(command);
+                await _mediator.Send(new DeleteRequestCommand { Id = id});
                 return Ok();
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }

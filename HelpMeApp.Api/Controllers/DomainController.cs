@@ -4,6 +4,7 @@ using HelpMeApp.Application.Handlers.Domain.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +17,11 @@ namespace HelpMeApp.Api.Controllers
     public class DomainController : ControllerBase
     {
         readonly IMediator _mediator;
-        public DomainController(IMediator mediator)
+        protected readonly ILogger<DomainController> _logger;
+        public DomainController(IMediator mediator, ILogger<DomainController> logger)
         {
             _mediator = mediator;
+            _logger = logger;
         }
 
         [HttpGet]
@@ -31,7 +34,7 @@ namespace HelpMeApp.Api.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }
@@ -46,7 +49,7 @@ namespace HelpMeApp.Api.Controllers
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }
@@ -61,7 +64,7 @@ namespace HelpMeApp.Api.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return Ok();
         }
@@ -76,22 +79,22 @@ namespace HelpMeApp.Api.Controllers
             }
             catch (Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }
 
         [HttpDelete("DeleteDomain")]
-        public async Task<ActionResult> DeleteDomain(DeleteDomainCommand command)
+        public async Task<ActionResult> DeleteDomain([FromRoute] Guid id)
         {
             try
             {
-                await _mediator.Send(command);
+                await _mediator.Send(new DeleteDomainCommand { Id = id});
                 return Ok();
             }
             catch(Exception ex)
             {
-
+                _logger.LogError(ex.Message);
             }
             return null;
         }

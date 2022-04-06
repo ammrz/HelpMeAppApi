@@ -23,36 +23,76 @@ namespace HelpMeApp.Api.Controllers
         [HttpGet]
         public async Task<ActionResult> GetComments(GetAllCommentQuery query)
         {
-            var dtos = await _mediator.Send(query);
-            return Ok(dtos);
+            try
+            {
+                var dtos = await _mediator.Send(query);
+                return Ok(dtos);
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
 
-        [HttpGet("GetCommentById")]
-        public async Task<ActionResult> GetCommentById(GetCommentByIdQuery query)
+        [HttpGet("GetCommentById/id")]
+        public async Task<ActionResult> GetCommentById([FromRoute] Guid id)
         {
-            var dto = await _mediator.Send(query);
-            return Ok(dto);
+            try
+            {
+                var dto = await _mediator.Send(new GetCommentByIdQuery { Id = id });
+                return Ok(dto);
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
 
         [HttpPost("CreateComment")]
         public async Task<ActionResult> CreateComment(AddCommentCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            try
+            {
+                await _mediator.Send(command);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
 
         [HttpPut("UpdateComment")]
         public async Task<ActionResult> UpdateComment(UpdateCommentCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            try
+            {
+                await _mediator.Send(command);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
 
         [HttpDelete("DeleteComment")]
         public async Task<ActionResult> DeleteComment(DeleteCommentCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            try
+            {
+                await _mediator.Send(command);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
     }
 }

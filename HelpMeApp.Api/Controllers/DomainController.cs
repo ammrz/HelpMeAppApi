@@ -22,12 +22,12 @@ namespace HelpMeApp.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<List<DomainDto>> GetDomains()
+        public async Task<ActionResult> GetDomains()
         {
             try
             {
                 var dtos = await _mediator.Send(new GetAllDomainQuery());
-                return dtos;
+                return Ok(dtos);
             }
             catch (Exception ex)
             {
@@ -36,11 +36,19 @@ namespace HelpMeApp.Api.Controllers
             return null;
         }
 
-        [HttpGet("GetDomainById")]
-        public async Task<ActionResult> GetDomainById(GetDomainByIdQuery query)
+        [HttpGet("GetDomainById/{id}")]
+        public async Task<ActionResult> GetDomainById([FromRoute] Guid id)
         {
-            var dto = await _mediator.Send(query);
-            return Ok(dto);
+            try
+            {
+                var dto = await _mediator.Send(new GetDomainByIdQuery { Id = id });
+                return Ok(dto);
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
 
         [HttpPost("CreateDomain")]
@@ -49,9 +57,9 @@ namespace HelpMeApp.Api.Controllers
             try
             {
                 await _mediator.Send(command);
-               
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -61,15 +69,31 @@ namespace HelpMeApp.Api.Controllers
         [HttpPut("UpdateDomain")]
         public async Task<ActionResult> UpdateDomain(UpdateDomainCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            try
+            {
+                await _mediator.Send(command);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return null;
         }
 
         [HttpDelete("DeleteDomain")]
         public async Task<ActionResult> DeleteDomain(DeleteDomainCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            try
+            {
+                await _mediator.Send(command);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
     }
 }

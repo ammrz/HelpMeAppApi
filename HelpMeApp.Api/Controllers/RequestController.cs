@@ -23,36 +23,76 @@ namespace HelpMeApp.Api.Controllers
         [HttpGet]
         public async Task<ActionResult> GetRequests(GetAllRequestQuery query)
         {
-            var dtos = await _mediator.Send(query);
-            return Ok(dtos);
+            try
+            {
+                var dtos = await _mediator.Send(query);
+                return Ok(dtos);
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
 
-        [HttpGet( "GetRequestById")]
-        public async Task<ActionResult> GetRequestById(GetRequestByIdQuery query)
+        [HttpGet( "GetRequestById/id")]
+        public async Task<ActionResult> GetRequestById([FromRoute] Guid id)
         {
-            var dto = await _mediator.Send(query);
-            return Ok(dto);
+            try
+            {
+                var dto = await _mediator.Send(new GetRequestByIdQuery { Id = id });
+                return Ok(dto);
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
 
         [HttpPost( "CreateRequest")]
         public async Task<ActionResult> CreateRequest(AddRequestCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            try
+            {
+                await _mediator.Send(command);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
 
         [HttpPut( "UpdateRequest")]
         public async Task<ActionResult> UpdateRequest(UpdateRequestCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            try
+            {
+                await _mediator.Send(command);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
 
         [HttpDelete( "DeleteRequest")]
         public async Task<ActionResult> DeleteRequest(DeleteRequestCommand command)
         {
-            await _mediator.Send(command);
-            return Ok();
+            try
+            {
+                await _mediator.Send(command);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return null;
         }
     }
 }

@@ -27,6 +27,8 @@ namespace HelpMeApp.Application.Mapper
         public ModelMapper()
         {
             CreateMap<Request, RequestDto>().ReverseMap();
+            CreateMap<Comment, CommentDto>().ReverseMap();
+            CreateMap<HelpMeApp.Domain.Entities.Domain, DomainDto>().ReverseMap();
         }
     }
 }

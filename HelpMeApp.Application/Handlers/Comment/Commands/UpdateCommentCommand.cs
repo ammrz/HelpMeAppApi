@@ -17,7 +17,7 @@ namespace HelpMeApp.Application.Handlers.Comment.Commands
         public class UpdateCommentHandler : IRequestHandler<UpdateCommentCommand, Unit>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Comment> _repository;
-            public UpdateCommentHandler(GenericRepository<HelpMeApp.Domain.Entities.Comment> repository)
+            public UpdateCommentHandler(IGenericRepository<HelpMeApp.Domain.Entities.Comment> repository)
             {
                 _repository = repository;
             }

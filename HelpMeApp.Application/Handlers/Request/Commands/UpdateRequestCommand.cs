@@ -18,7 +18,7 @@ namespace HelpMeApp.Application.Handlers.Request.Commands
         public class UpdateRequestHandler : IRequestHandler<UpdateRequestCommand, Unit>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Request> _repository;
-            public UpdateRequestHandler(GenericRepository<HelpMeApp.Domain.Entities.Request> repository)
+            public UpdateRequestHandler(IGenericRepository<HelpMeApp.Domain.Entities.Request> repository)
             {
                 _repository = repository;
             }

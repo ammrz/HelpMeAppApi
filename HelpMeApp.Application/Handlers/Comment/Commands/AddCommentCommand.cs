@@ -16,7 +16,7 @@ namespace HelpMeApp.Application.Handlers.Comment.Commands
         public class AddCommentHandler : IRequestHandler<AddCommentCommand, Unit>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Comment> _repository;
-            public AddCommentHandler(GenericRepository<HelpMeApp.Domain.Entities.Comment> repository)
+            public AddCommentHandler(IGenericRepository<HelpMeApp.Domain.Entities.Comment> repository)
             {
                 _repository = repository;
             }

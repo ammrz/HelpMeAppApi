@@ -16,7 +16,7 @@ namespace HelpMeApp.Application.Handlers.Domain.Commands
         public class DeleteDomainHandler : IRequestHandler<DeleteDomainCommand, Unit>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Domain> _repository;
-            public DeleteDomainHandler(GenericRepository<HelpMeApp.Domain.Entities.Domain> repository)
+            public DeleteDomainHandler(IGenericRepository<HelpMeApp.Domain.Entities.Domain> repository)
             {
                 _repository = repository;
             }

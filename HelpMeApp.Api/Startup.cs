@@ -1,4 +1,9 @@
+using Autofac;
+using HelpMeApp.Api.Container;
+using HelpMeApp.Application.Container;
+using HelpMeApp.Application.Handlers.Domain.Commands;
 using HelpMeApp.Infrastructure.Context;
+using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -15,6 +20,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace HelpMeApp.Api
@@ -33,16 +39,23 @@ namespace HelpMeApp.Api
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
-
+            var x = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<HelpMeAppDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
-            services.AddDbContext<HelpMeAppDbContext>(options =>
-                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddApplication();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HelpMeApp.Api", Version = "v1" });
             });
+
         }
 
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            #region Add modules registrations
+            builder.RegisterModule(new Container.DependencyInjection());
+            #endregion
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -50,7 +63,10 @@ namespace HelpMeApp.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HelpMeApp.Api v1"));
+                //app.UseSwaggerUI(c => c.SwaggerEndpoint("./swagger/v1/swagger.json", "HelpMeApp.Api v1"));
+                app.UseSwaggerUI(c => {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "HelpMeApp.Api v1");
+                });
             }
 
             app.UseHttpsRedirection();
@@ -64,6 +80,7 @@ namespace HelpMeApp.Api
             {
                 endpoints.MapControllers();
             });
+            app.UseDeveloperExceptionPage();
         }
     }
 }

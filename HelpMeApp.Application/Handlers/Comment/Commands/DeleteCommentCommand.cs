@@ -16,7 +16,7 @@ namespace HelpMeApp.Application.Handlers.Comment.Commands
         public class DeleteCommentHandler : IRequestHandler<DeleteCommentCommand, Unit>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Request> _repository;
-            public DeleteCommentHandler(GenericRepository<HelpMeApp.Domain.Entities.Request> repository)
+            public DeleteCommentHandler(IGenericRepository<HelpMeApp.Domain.Entities.Request> repository)
             {
                 _repository = repository;
             }

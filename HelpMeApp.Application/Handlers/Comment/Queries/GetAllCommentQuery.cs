@@ -17,7 +17,7 @@ namespace HelpMeApp.Application.Handlers.Comment.Queries
         public class GetAllCommentHandler : IRequestHandler<GetAllCommentQuery, List<CommentDto>>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Comment> _repository;
-            public GetAllCommentHandler(GenericRepository<HelpMeApp.Domain.Entities.Comment> repository)
+            public GetAllCommentHandler(IGenericRepository<HelpMeApp.Domain.Entities.Comment> repository)
             {
                 _repository = repository;
             }

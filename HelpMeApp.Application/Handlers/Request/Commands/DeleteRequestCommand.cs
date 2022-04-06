@@ -16,7 +16,7 @@ namespace HelpMeApp.Application.Handlers.Request.Commands
         public class DeleteRequestHandler : IRequestHandler<DeleteRequestCommand, Unit>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Request> _repository;
-            public DeleteRequestHandler(GenericRepository<HelpMeApp.Domain.Entities.Request> repository)
+            public DeleteRequestHandler(IGenericRepository<HelpMeApp.Domain.Entities.Request> repository)
             {
                 _repository = repository;
             }

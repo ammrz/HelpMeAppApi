@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HelpMeApp.Application.Handlers.Domain.Commands
 {
-    class AddDomainCommand : IRequest
+   public  class AddDomainCommand : IRequest
     {
         public string Title { get; set; }
         public string Desciption { get; set; }
@@ -17,7 +17,7 @@ namespace HelpMeApp.Application.Handlers.Domain.Commands
         public class AddDomainHandler : IRequestHandler<AddDomainCommand, Unit>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Domain> _repository;
-            public AddDomainHandler(GenericRepository<HelpMeApp.Domain.Entities.Domain> repository)
+            public AddDomainHandler(IGenericRepository<HelpMeApp.Domain.Entities.Domain> repository)
             {
                 _repository = repository;
             }

@@ -19,7 +19,7 @@ namespace HelpMeApp.Application.Handlers.Domain.Queries
         public class GetDomainByIdHandler : IRequestHandler<GetDomainByIdQuery, DomainDto>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Domain> _repository;
-            public GetDomainByIdHandler(GenericRepository<HelpMeApp.Domain.Entities.Domain> repository)
+            public GetDomainByIdHandler(IGenericRepository<HelpMeApp.Domain.Entities.Domain> repository)
             {
                 _repository = repository;
             }

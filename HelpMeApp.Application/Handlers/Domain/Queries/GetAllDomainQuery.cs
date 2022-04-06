@@ -17,7 +17,7 @@ namespace HelpMeApp.Application.Handlers.Domain.Queries
         public class GetAllDomainHandler : IRequestHandler<GetAllDomainQuery, List<DomainDto>>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Domain> _repository;
-            public GetAllDomainHandler(GenericRepository<HelpMeApp.Domain.Entities.Domain> repository)
+            public GetAllDomainHandler(IGenericRepository<HelpMeApp.Domain.Entities.Domain> repository)
             {
                 _repository = repository;
             }

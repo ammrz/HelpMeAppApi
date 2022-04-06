@@ -21,5 +21,10 @@ namespace HelpMeApp.Infrastructure.Context
         public DbSet<Request> Requests { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<HelpMeApp.Domain.Entities.Domain> Domains { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            // You don't actually ever need to call this
+        }
     }
 }

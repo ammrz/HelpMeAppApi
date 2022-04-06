@@ -18,7 +18,7 @@ namespace HelpMeApp.Application.Handlers.Domain.Commands
         public class UpdateDomainHandler : IRequestHandler<UpdateDomainCommand, Unit>
         {
             private IGenericRepository<HelpMeApp.Domain.Entities.Domain> _repository;
-            public UpdateDomainHandler(GenericRepository<HelpMeApp.Domain.Entities.Domain> repository)
+            public UpdateDomainHandler(IGenericRepository<HelpMeApp.Domain.Entities.Domain> repository)
             {
                 _repository = repository;
             }

@@ -29,28 +29,28 @@ namespace HelpMeApp.Api.Controllers
             try
             {
                 var dtos = await _mediator.Send(new GetAllCommentQuery());
-                return Ok(dtos);
+                return dtos.Any() ? Ok(dtos) : NotFound();
             }
             catch(Exception ex)
             {
                 _logger.LogError(ex.Message);
             }
-            return null;
+            return Problem();
         }
 
-        [HttpGet("GetCommentById/id")]
+        [HttpGet("GetCommentById/{id}")]
         public async Task<ActionResult> GetCommentById([FromRoute] Guid id)
         {
             try
             {
                 var dto = await _mediator.Send(new GetCommentByIdQuery { Id = id });
-                return Ok(dto);
+                return dto != null ? Ok(dto) : NotFound();
             }
             catch(Exception ex)
             {
                 _logger.LogError(ex.Message);
             }
-            return null;
+            return Problem();
         }
 
         [HttpPost("CreateComment")]
@@ -58,14 +58,14 @@ namespace HelpMeApp.Api.Controllers
         {
             try
             {
-                await _mediator.Send(command);
-                return Ok();
+                var id = await _mediator.Send(command);
+                return Ok(id);
             }
             catch(Exception ex)
             {
                 _logger.LogError(ex.Message);
             }
-            return null;
+            return Problem();
         }
 
         [HttpPut("UpdateComment")]
@@ -80,10 +80,10 @@ namespace HelpMeApp.Api.Controllers
             {
                 _logger.LogError(ex.Message);
             }
-            return null;
+            return Problem();
         }
 
-        [HttpDelete("DeleteComment")]
+        [HttpDelete("DeleteComment/{id}")]
         public async Task<ActionResult> DeleteComment([FromRoute] Guid id)
         {
             try
@@ -95,7 +95,7 @@ namespace HelpMeApp.Api.Controllers
             {
                 _logger.LogError(ex.Message);
             }
-            return null;
+            return Problem();
         }
     }
 }

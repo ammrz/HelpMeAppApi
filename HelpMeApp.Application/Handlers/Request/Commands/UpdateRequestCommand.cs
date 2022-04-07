@@ -14,6 +14,7 @@ namespace HelpMeApp.Application.Handlers.Request.Commands
         public Guid Id { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public Guid DomainId { get; set; }
 
         public class UpdateRequestHandler : IRequestHandler<UpdateRequestCommand, Unit>
         {
@@ -28,6 +29,7 @@ namespace HelpMeApp.Application.Handlers.Request.Commands
                 entity.Subject = request.Subject;
                 entity.Body = request.Body;
                 entity.UpdateDate = DateTime.Now;
+                entity.DomainId = request.DomainId;
 
                 _repository.Update(entity);
                 await _repository.Save();

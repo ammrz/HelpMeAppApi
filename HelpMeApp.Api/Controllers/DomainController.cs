@@ -30,13 +30,13 @@ namespace HelpMeApp.Api.Controllers
             try
             {
                 var dtos = await _mediator.Send(new GetAllDomainQuery());
-                return Ok(dtos);
+                return dtos.Any() ? Ok(dtos) : NotFound();
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
             }
-            return null;
+            return Problem();
         }
 
         [HttpGet("GetDomainById/{id}")]
@@ -45,13 +45,13 @@ namespace HelpMeApp.Api.Controllers
             try
             {
                 var dto = await _mediator.Send(new GetDomainByIdQuery { Id = id });
-                return Ok(dto);
+                return dto != null ? Ok(dto) : NotFound();
             }
             catch(Exception ex)
             {
                 _logger.LogError(ex.Message);
             }
-            return null;
+            return Problem();
         }
 
         [HttpPost("CreateDomain")]
@@ -59,14 +59,14 @@ namespace HelpMeApp.Api.Controllers
         {
             try
             {
-                await _mediator.Send(command);
-
+                var id = await _mediator.Send(command);
+                return Ok(id);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex.Message);
             }
-            return Ok();
+            return Problem();
         }
 
         [HttpPut("UpdateDomain")]
@@ -81,10 +81,10 @@ namespace HelpMeApp.Api.Controllers
             {
                 _logger.LogError(ex.Message);
             }
-            return null;
+            return Problem();
         }
 
-        [HttpDelete("DeleteDomain")]
+        [HttpDelete("DeleteDomain/{id}")]
         public async Task<ActionResult> DeleteDomain([FromRoute] Guid id)
         {
             try
@@ -96,7 +96,7 @@ namespace HelpMeApp.Api.Controllers
             {
                 _logger.LogError(ex.Message);
             }
-            return null;
+            return Problem();
         }
     }
 }

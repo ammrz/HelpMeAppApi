@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace HelpMeApp.Infrastructure.Repositories
@@ -18,6 +19,10 @@ namespace HelpMeApp.Infrastructure.Repositories
         public async Task<IEnumerable<T>> GetAll()
         {
             return await _context.Set<T>().ToListAsync();
+        }
+        public async Task<IEnumerable<T>> Get(Expression<System.Func<T, bool>> filter)
+        {
+            return await _context.Set<T>().Where(filter).ToListAsync();
         }
         public async Task<T> GetById(object id)
         {

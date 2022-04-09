@@ -53,6 +53,23 @@ namespace HelpMeApp.Api.Controllers
             return Problem();
         }
 
+
+        [HttpGet("GetRequestsByDomianId/{domainId}")]
+        public async Task<ActionResult> GetRequestsByDomianId([FromRoute] Guid domainId)
+        {
+            try
+            {
+                var dto = await _mediator.Send(new GetRequestsByDomainIdQuery { DomainId = domainId });
+                return dto != null ? Ok(dto) : NotFound();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+            return Problem();
+        }
+
+
         [HttpPost( "CreateRequest")]
         public async Task<ActionResult> CreateRequest(AddRequestCommand command)
         {

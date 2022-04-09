@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Handlers\Comment\Commands\" />
-    <Folder Include="Handlers\Comment\Queries\" />
     <Folder Include="Handlers\Domain\Commands\" />
     <Folder Include="Handlers\Domain\Queries\" />
     <Folder Include="Handlers\Request\Commands\" />

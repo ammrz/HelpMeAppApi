@@ -53,6 +53,20 @@ namespace HelpMeApp.Api.Controllers
             return Problem();
         }
 
+        [HttpGet("GetCommentsByRequestId/{requestId}")]
+        public async Task<ActionResult> GetCommentsByRequestId([FromRoute] Guid requestId)
+        {
+            try
+            {
+                var dto = await _mediator.Send(new GetCommentsByRequestIdQuery { RequestId = requestId });
+                return dto != null ? Ok(dto) : NotFound();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+            return Problem();
+        }
         [HttpPost("CreateComment")]
         public async Task<ActionResult> CreateComment(AddCommentCommand command)
         {

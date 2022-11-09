@@ -11,6 +11,7 @@ namespace HelpMeApp.Infrastructure.Repositories
     {
         Task<IEnumerable<T>> GetAll();
         Task<IEnumerable<T>> Get(Expression<System.Func<T, bool>> filter);
+        Task<IEnumerable<T>> GetWithIncludes(params Expression<Func<T, object>>[] includes);
         Task<T> GetById(object id);
         Task Insert(T obj);
         void Update(T obj);

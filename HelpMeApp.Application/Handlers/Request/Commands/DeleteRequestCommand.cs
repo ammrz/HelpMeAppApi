@@ -22,9 +22,8 @@ namespace HelpMeApp.Application.Handlers.Request.Commands
             }
             public async Task<Unit> Handle(DeleteRequestCommand request, CancellationToken cancellationToken)
             {
-                var entity = await _repository.GetById(request.Id);
 
-                _repository.Delete(entity);
+                _repository.Delete(request.Id);
                 await _repository.Save();
 
                 return Unit.Value;

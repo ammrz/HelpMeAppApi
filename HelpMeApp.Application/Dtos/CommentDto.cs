@@ -10,5 +10,6 @@ namespace HelpMeApp.Application.Dtos
     public class CommentDto : DtoBase
     {
         public string Body { get; set; }
-    }
+        public Guid RequestId { get; set; }
+}
 }

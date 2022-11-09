@@ -1,12 +1,8 @@
-﻿using AutoMapper.Internal.Mappers;
-using HelpMeApp.Application.Dtos;
+﻿using HelpMeApp.Application.Dtos;
 using HelpMeApp.Application.Mapper;
 using HelpMeApp.Infrastructure.Repositories;
 using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

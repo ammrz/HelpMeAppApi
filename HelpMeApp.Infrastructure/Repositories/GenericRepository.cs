@@ -1,5 +1,6 @@
 ﻿using HelpMeApp.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -23,6 +24,18 @@ namespace HelpMeApp.Infrastructure.Repositories
         public async Task<IEnumerable<T>> Get(Expression<System.Func<T, bool>> filter)
         {
             return await _context.Set<T>().Where(filter).ToListAsync();
+        }
+        public async Task<IEnumerable<T>> GetWithIncludes(params Expression<Func<T, object>>[] includes)
+        {
+           var dbSet = _context.Set<T>();
+
+            IEnumerable<T> query = null;
+            foreach (var include in includes)
+            {
+                query = dbSet.Include(include);
+            }
+
+            return query ?? dbSet;
         }
         public async Task<T> GetById(object id)
         {

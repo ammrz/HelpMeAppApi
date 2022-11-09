@@ -9,5 +9,6 @@ namespace HelpMeApp.Application.Dtos.Base
    public abstract class DtoBase
     {
         public Guid Id { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

@@ -15,16 +15,15 @@ namespace HelpMeApp.Application.Handlers.Comment.Commands
 
         public class DeleteCommentHandler : IRequestHandler<DeleteCommentCommand, Unit>
         {
-            private IGenericRepository<HelpMeApp.Domain.Entities.Request> _repository;
-            public DeleteCommentHandler(IGenericRepository<HelpMeApp.Domain.Entities.Request> repository)
+            private IGenericRepository<HelpMeApp.Domain.Entities.Comment> _repository;
+            public DeleteCommentHandler(IGenericRepository<HelpMeApp.Domain.Entities.Comment> repository)
             {
                 _repository = repository;
             }
             public async Task<Unit> Handle(DeleteCommentCommand request, CancellationToken cancellationToken)
             {
-                var entity = await _repository.GetById(request.Id);
 
-                _repository.Delete(entity);
+                _repository.Delete(request.Id);
                 await _repository.Save();
 
                 return Unit.Value;

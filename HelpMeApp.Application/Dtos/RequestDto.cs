@@ -11,5 +11,7 @@ namespace HelpMeApp.Application.Dtos
     {
         public string Subject { get; set; }
         public string Body { get; set; }
+        public Guid DomainId { get; set; }
+        public List<CommentDto> Comments { get; set; }
     }
 }
